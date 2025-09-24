@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <div class="notes-grid">
+    @for (uzrasas of uzrasai; track $index) {
+      <div class="card shadow-sm bg-dark text-light position-relative">
+        <button class="btn btn-sm btn-outline-secondary position-absolute top-0 end-0 m-2 delete-btn"
+                (click)="istrinti($index)">
+          ✕
+        </button>
+        <div class="card-body"
+             [class.collapsed]="!uzrasas.expanded"
+             [class.expanded]="uzrasas.expanded"
+             (click)="uzrasas.expanded = !uzrasas.expanded">
+          <h5 class="card-title">
+            {{ (uzrasas.pavadinimas ?? 'Be pavadinimo') | slice:0:50 }}
+            @if (uzrasas.pavadinimas.length > 50) {
+              <span>…</span>
+            }
+          </h5>
+          <p class="card-text">{{ uzrasas.tekstas }}</p>
+        </div>
+      </div>
+    }
+
+    @if (!adding) {
+      <div class="card shadow-sm d-flex justify-content-center align-items-center bg-dark text-white"
+           style="cursor: pointer; font-size: 3rem;"
+           (click)="adding = true">
+        <span class="fw-bold">+</span>
+      </div>
+    } @else {
+      <div class="card shadow-sm bg-dark text-light">
+        <div class="card-body">
+          <input type="text"
+                 class="form-control mb-2 bg-dark text-white border-secondary"
+                 [(ngModel)]="nPavadinimas"
+                 placeholder="Pavadinimas">
+
+          <textarea class="form-control mb-2 bg-dark text-white border-secondary"
+                    [(ngModel)]="nTekstas"
+                    rows="3"
+                    placeholder="Užrašas..."></textarea>
+
+          <div class="d-flex justify-content-end gap-2">
+            <button class="btn btn-sm btn-outline-secondary" (click)="atsaukti()">✕</button>
+            <button class="btn btn-sm btn-success" (click)="prideti()">Pridėti</button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

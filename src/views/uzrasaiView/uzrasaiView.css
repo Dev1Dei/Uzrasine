@@ -1,0 +1,58 @@
+/*-----------Buttons---------*/
+.delete-btn {
+  color: #aaa;
+  border: none;
+  background: transparent;
+}
+
+.bg-dark {
+  background-color: #161616 !important;
+}
+.delete-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/*-----------Formos---------*/
+.form-control::placeholder {
+  color: #bbb;
+  opacity: 1;
+}
+
+/*-----------Užrašai---------*/
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.card-body.collapsed {
+  max-height: 200px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: max-height 0.3s ease;
+}
+
+.card-body.expanded {
+  max-height: none;
+  transition: max-height 0.3s ease;
+}
+
+.card-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 3px;
+}
+
+.card-body::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+textarea {
+  resize: none;
+}
+
