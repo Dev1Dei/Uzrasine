@@ -20,18 +20,22 @@ export class UzrasaiView implements OnInit {
   constructor(private uzrasaiService: UzrasaiService) {}
 
   ngOnInit() {
-    this.uzrasai = this.uzrasaiService.gautiVisus();
+    this.uzrasaiService.uzrasai$.subscribe(( data )=> {
+      this.uzrasai = data;
+    });
   }
 
-  istrinti(i: number) {
-    this.uzrasai.splice(i, 1);
-    this.uzrasaiService.issaugoti(this.uzrasai);
+  istrinti(id: string) {
+    this.uzrasaiService.istrinti(id);
   }
 
   prideti() {
     if (this.nPavadinimas.trim() || this.nTekstas.trim()) {
-      this.uzrasai.push({ pavadinimas: this.nPavadinimas, tekstas: this.nTekstas, expanded: false });
-      this.uzrasaiService.issaugoti(this.uzrasai);
+      this.uzrasaiService.prideti({
+        pavadinimas: this.nPavadinimas,
+        tekstas: this.nTekstas,
+        expanded: false
+      });
     }
     this.atnaujinti();
   }
