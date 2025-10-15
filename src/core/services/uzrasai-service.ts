@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Database, ref, set, push, remove, onValue } from '@angular/fire/database';
+import { Database, ref, set, push, remove, update, onValue } from '@angular/fire/database';
 import { BehaviorSubject } from 'rxjs';
 import { Uzrasas } from '../interfaces/uzrasas';
 
@@ -28,12 +28,21 @@ export class UzrasaiService {
     });
   }
 
-  prideti(uzrasas: Uzrasas) {
+  prideti(pavadinimas: string, tekstas: string) {
     const newRef = push(this.notesRef);
-    return set(newRef, uzrasas);
+    const naujasUzrasas: Uzrasas = {
+      pavadinimas: pavadinimas.trim() || 'Be pavadinimo',
+      tekstas: tekstas.trim(),
+      expanded: false
+    };
+    return set(newRef, naujasUzrasas);
   }
 
   istrinti(id: string) {
     return remove(ref(this.db, `uzrasai/${id}`));
+  }
+
+  atnaujinti(id: string, naujiDuomenys: Partial<Uzrasas>) {
+    return update(ref(this.db, `uzrasai/${id}`), naujiDuomenys);
   }
 }
